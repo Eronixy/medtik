@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reveal Picture and TypeWriter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    :root {
+  --pink: #ff78c4;
+  --purple: #e1aeff;
+  --cream: #ffecec;
+  --pastel: #ffbdf7;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Montserrat", "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 62.5%;
+}
+
+.heart {
+  background-image: linear-gradient(var(--pink), var(--purple));
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#pictureContainer,
+#typingContainer {
+  padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1s ease, transform 250ms ease-in-out;
+  display: none;
+}
+
+#pictureContainer img {
+  transition: opacity 1s ease;
+}
+
+#pictureContainer:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+#typingContainer h1 {
+  white-space: pre-line;
+  font-size: 2rem;
+}
+
+#typingContainer {
+  padding: 1rem;
+  text-align: center;
+  max-height: 80vh;
+  border-radius: 10px;
+  border: 0.5rem solid black;
+  box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.6),
+    -0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.6);
+  background-color: var(--cream);
+  min-width: 500px;
+  max-width: 40vw;
+}
+
+.tulips {
+  max-height: 70vh;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 0.5rem solid black;
+  box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.6),
+    -0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.6);
+  background-color: var(--cream);
+}
+
+#deanne {
+  font-family: Montserrat;
+  font-size: 50px;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+button {
+  opacity: 1;
+  margin: 3rem;
+  padding-bottom: 1rem;
+  min-width: 300px;
+  background-image: radial-gradient(var(--pastel), var(--pink));
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 50px;
+  border: 0.5rem solid black;
+  box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.6),
+    -0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.6);
+  transition: box-shadow 250ms ease-out, opacity 1s ease;
+}
+
+.button-fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+button:hover {
+  box-shadow: 0.25rem 0.25rem 1rem rgba(2, 71, 211, 0.6),
+    -0.25rem 0.25rem 1rem rgba(2, 71, 211, 0.6);
+}
+  </style>
+</head>
+
+<body>
+  <header class="header"></header>
+  <main>
+    <section class="heart">
+      <div class="heart_symbol">
+        <h1 id="deanne"></h1>
+        <button id="revealButton">😸</button>
+        <div style="display: flex;">
+          <div id="typingContainer">
+            <h1 id="typingText"></h1>
+          </div>
+          <div id="pictureContainer">
+            <img id="imageElement" src="https://i.imgur.com/3kMANna.jpg" alt="Revealed Picture" class="tulips">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  var txt = "Hi Deanne. ♥";
+  var speed = 150;
+  var typingText = "Ano pre? Ngayon ka makakatikim ng aking cringe clingy side. Anong araw ba ngayon? Parang normal Monday lang naman? 😓\n\n Anyways these virtual flowers are for the one and only Ma. Deanne Hazel Tabaosares dahil isa siyang sweet & pretty girl na kahit tarantado minsan ay deserve pa rin ng flowers, and of course - everything beautiful the world has to offer. 💐\n\n ACKKKKK. Kala mo naman talaga.😍\n\nMay you get everything that your delulu mind hopes for; maliban kay Wonwoo kasi nakareserve na siya sakin! 😾 I will always be an observer of how hard you work to get the things you want, and rightfully deserve.\n\nMay this August bring you the peace of mind that you seek, and the academic journey that you will find fulfillment in. 🍂 \n\nThe funniest girl I know has the right to be the happiest one. \nYun lang. DI KA CHARACTER SA AU HMPH! 😤 \n\nP.S. You may click the bouquet pero sana ready ka mangulila. 😔";
+  var typingSpeed = 75;
+
+  var imageUrls = [
+    "https://i.imgur.com/3kMANna.jpg",
+    "https://i.imgur.com/Ek5p3XQ.jpg",
+    "https://i.imgur.com/USJRaSX.jpg",
+    "https://i.imgur.com/EYzOzyS.jpg",
+    "https://i.imgur.com/G9npwPE.jpg",
+    "https://i.imgur.com/T9JzGYX.jpg",
+    "https://i.imgur.com/y37MP6j.jpg",
+    "https://i.imgur.com/DmzT4IC.jpg",
+    "https://i.imgur.com/SMjMsLg.jpg",
+    "https://i.imgur.com/4cQCnkq.jpg",
+    "https://i.imgur.com/6gpNwut.jpg",
+    "https://i.imgur.com/IF1fyyV.jpg",
+    "https://i.imgur.com/9FOc9Ee.jpg",
+    "https://i.imgur.com/DB6owO1.jpg"
+  ];
+
+  function preloadImages(urls) {
+    for (var i = 0; i < urls.length; i++) {
+      var img = new Image();
+      img.src = urls[i];
+    }
+  }
+
+  preloadImages(imageUrls);
+
+  var currentImageIndex = 0;
+  var imageElement = document.getElementById("imageElement");
+
+  function flipImage() {
+    currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+
+    var pictureContainer = document.getElementById("pictureContainer");
+    pictureContainer.style.opacity = "0";
+
+    setTimeout(function () {
+      imageElement.src = imageUrls[currentImageIndex];
+      pictureContainer.style.opacity = "1";
+    }, 1000);
+  }
+
+  imageElement.addEventListener("click", flipImage);
+
+  document
+    .getElementById("revealButton")
+    .addEventListener("click", function () {
+      var pictureContainer = document.getElementById("pictureContainer");
+      var button = document.getElementById("revealButton");
+      var deanne = document.getElementById("deanne");
+      var typingContainer = document.getElementById("typingContainer");
+
+      button.classList.add("button-fade-out");
+      deanne.style.opacity = "0";
+
+      setTimeout(function () {
+        pictureContainer.style.opacity = "1";
+        pictureContainer.style.display = "flex";
+        typingContainer.style.opacity = "1";
+        typingContainer.style.display = "flex";
+      }, 1000);
+
+      setTimeout(function () {
+        button.style.display = "none";
+        deanne.style.display = "none";
+        typeWriter2();
+      }, 2000);
+    });
+
+  function typeWriter() {
+    var i = 0;
+    var targetElement = document.getElementById("deanne");
+
+    function typeNextCharacter() {
+      if (i < txt.length) {
+        targetElement.textContent += txt.charAt(i);
+        i++;
+        setTimeout(typeNextCharacter, speed);
+      }
+    }
+
+    typeNextCharacter();
+  }
+
+  function typeWriter2() {
+    var i = 0;
+    var targetElement = document.getElementById("typingText");
+
+    function typeNextCharacter() {
+      if (i < typingText.length) {
+        targetElement.textContent += typingText.charAt(i);
+        i++;
+        setTimeout(typeNextCharacter, typingSpeed);
+      }
+    }
+
+    typeNextCharacter();
+  }
+
+  typeWriter();
+  
+  var pictureContainer = document.getElementById("pictureContainer");
+  pictureContainer.style.opacity = "0";
+});
+  </script>
+  </body>
+  <html>
